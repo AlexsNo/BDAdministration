@@ -24,3 +24,12 @@ git config remote.origin.url https://github.com/github.com/_login_/
 git config remote.origin.url https://github.com/AlexsNo/BDAdministration
 ssh-keygen -t rsa -b 4096 -C "ggmalts@gmail.com"
 cat ~/.ssh/id_rsa.pub
+--allow-unrelated-histories
+git --work-tree="." pull --allow-unrelated-histories
+git --work-tree="."
+pull --allow-unrelated-historie
+git pull origin master
+git pull origin master
+git pull origin master --allow-unrelated-histories
+git pull origin master --allow-unrelated-histories
+git pull origin master --allow-unrelated-histories

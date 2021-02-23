@@ -2,8 +2,10 @@ package src;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
 
-public class SaveState {
+public class SaveState implements Serializable {
     private String nameInfo;
     private String emailInfo;
     private String pathInfo;
@@ -33,14 +35,15 @@ public class SaveState {
     public void setPathInfo(String pathInfo){
         this.pathInfo = pathInfo;
     }
-    public void SaveDate(){
-        try{
-            FileOutputStream input = new Inp
-        }
-        catch (Exception e){
-
-        }
+    @Override
+    public String toString() {
+        return "SaveState{" +
+                "nameInfo=" + getNameInfo() +
+                ", emailInfo=" + getNameInfo() +
+                ", pathInfo=" + getPathInfo() +
+                '}';
+    }
     }
 
 
-}
+

@@ -15,15 +15,37 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Main extends Application {
-      public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList(new Official("Novikov","mail","C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\1.txt")
-      ,new Official("Novikov","mail","C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\2.txt"));
+    public static ArrayList<SaveState> dataArray;
+static{
+    try {
+         dataArray = new ArrayList<SaveState>();
+        FileInputStream input = new FileInputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
+        ObjectInputStream objPut = new ObjectInputStream(input);
+
+        dataArray.add((SaveState) objPut.readObject());
+
+
+    objPut.close();
+
+    }
+    catch(Exception e){
+
+    }
+    System.out.println(dataArray.toString());
+}
+      public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
+
     public static FileChooser fileChooser;
     public static File filePathChosser;
     @Override
     public void start(Stage primaryStage) throws Exception{
+        for(var vol:dataArray){
+            dataOfficial.add(new Official(vol.getNameInfo(),vol.getEmailInfo(),vol.getPathInfo()));
+        }
 
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");

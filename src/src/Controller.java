@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 import javax.security.auth.callback.Callback;
 
-public class Controller {
+public class Controller  {
     @FXML
     private TableColumn TableCol1;
 
@@ -43,6 +44,9 @@ public class Controller {
 
     @FXML
     private Button Button2;
+
+    @FXML
+    private Button Button3;
 
     @FXML
     private TextField TextF2;
@@ -74,9 +78,9 @@ public class Controller {
                              FileOutputStream output = new FileOutputStream(fileOut);
                              BufferedInputStream buffer = new BufferedInputStream(input);
                              byte[] data=new byte[buffer.available()];
-                             while (buffer.available()>0){
+
                                  buffer.read(data,0,data.length);
-                             }
+
                              output.write(data,0,data.length);
                              output.close();
                              buffer.close();
@@ -103,6 +107,25 @@ public class Controller {
                      });
 
     });
+        Button3.setOnAction(event -> {
+            SaveState save;
+            ArrayList<SaveState> saveArray = new ArrayList<SaveState>();
+            for(var vol:Main.dataOfficial){
+                save = new SaveState(vol.getName(), vol.getEmail(), vol.getPath());
+                saveArray.add(save);
+            }
+            try{
+                FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
+                ObjectOutputStream objPut = new ObjectOutputStream(outPut);
+                for(var vols:saveArray){
+                    objPut.writeObject(vols);
+                }
+                objPut.close();
+            }
+            catch(Exception e){
 
+            }
+
+        });
     }
 }
