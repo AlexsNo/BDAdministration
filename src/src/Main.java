@@ -19,14 +19,15 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Main extends Application {
-    public static ArrayList<SaveState> dataArray;
+    public static SaveState saveState = new SaveState();
+    public static SaveState saveReturn;
 static{
     try {
-         dataArray = new ArrayList<SaveState>();
+
         FileInputStream input = new FileInputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
         ObjectInputStream objPut = new ObjectInputStream(input);
 
-        dataArray.add((SaveState) objPut.readObject());
+        saveReturn=(SaveState) objPut.readObject();
 
 
     objPut.close();
@@ -35,7 +36,7 @@ static{
     catch(Exception e){
 
     }
-    System.out.println(dataArray.toString());
+
 }
       public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
 
@@ -43,9 +44,12 @@ static{
     public static File filePathChosser;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        for(var vol:dataArray){
-            dataOfficial.add(new Official(vol.getNameInfo(),vol.getEmailInfo(),vol.getPathInfo()));
-        }
+        if(saveReturn!=null)
+       for(int i=0;i<saveReturn.getPathInfo().size();i++){
+           dataOfficial.add(new Official(saveReturn.getNameInfo().get(i),
+                            saveReturn.getEmailInfo().get(i),
+                             saveReturn.getPathInfo().get(i)));
+       }
 
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");
@@ -57,8 +61,6 @@ static{
         fileChooser.setTitle("Choose file");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.showOpenDialog(stage);
-
-
     }
 
 

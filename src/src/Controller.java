@@ -105,22 +105,9 @@ public class Controller  {
 
     });
         Button3.setOnAction(event -> {
-            String[] names= new String[0];
-            SaveState save = new SaveState(names,names,names);
-            ArrayList<SaveState> saveArray = new ArrayList<SaveState>();
-            for(var vol:Main.dataOfficial){
-                 SaveState(vol.getName(), vol.getEmail(), vol.getPath());
-                saveArray.add(save);
-            }
-            try{
-                FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
-                ObjectOutputStream objPut = new ObjectOutputStream(outPut);
-                objPut.writeObject(saveArray.get(0));
-                objPut.close();
-            }
-            catch(Exception e){
 
-            }
+
+
 
         });
     }

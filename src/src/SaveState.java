@@ -2,38 +2,58 @@ package src;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SaveState implements Serializable {
-    private String[] nameInfo;
-    private String[] emailInfo;
-    private String[] pathInfo;
+    private ArrayList<String> nameInfo;
+    private ArrayList<String> emailInfo;
+    private ArrayList<String> pathInfo;
 
-    public SaveState(String[] nameInfo,String[] emailInfo,String[] pathInfo){
-        this.nameInfo = nameInfo;
-        this.emailInfo = emailInfo;
-        this.pathInfo = pathInfo;
+    public SaveState(){
+
     }
 
-    public String[] getNameInfo(){
+    public ArrayList<String> getNameInfo(){
         return nameInfo;
     }
 
-    public String[] getEmailInfo(){
+    public ArrayList<String> getEmailInfo(){
         return emailInfo;
     }
-    public String[] getPathInfo(){
+    public ArrayList<String> getPathInfo(){
         return pathInfo;
     }
-    public void setNameInfo(String[] nameInfo){
-        this.nameInfo = nameInfo;
+    public void setData(String nameInfo,String emailInfo,String pathInfo){
+        this.nameInfo.add(nameInfo);
+        this.emailInfo.add(emailInfo);
+        this.pathInfo.add(pathInfo);
     }
-    public void setEmailInfo(String[] emailInfo){
-        this.emailInfo = emailInfo;
+    public ArrayList<Official> officialReturn(){
+        ArrayList<Official> temp = new ArrayList<Official>();
+       for(int i=0;i<nameInfo.size();i++){
+           temp.add(new Official(nameInfo.get(i),emailInfo.get(i),pathInfo.get(i)));
+       }
+       return temp;
     }
-    public void setPathInfo(String[] pathInfo){
-        this.pathInfo = pathInfo;
+    public void writeDate(){
+        for(var vol:Main.dataOfficial){
+            nameInfo.add(vol.getName());
+            emailInfo.add(vol.getEmail());
+            pathInfo.add(vol.getPath());
+        }
+        try{
+            FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
+            ObjectOutputStream objPut = new ObjectOutputStream(outPut);
+            objPut.writeObject(officialReturn());
+            objPut.close();
+        }
+        catch(Exception e){
+
+        }
+
     }
     @Override
     public String toString() {
