@@ -1,0 +1,15 @@
+24.01.2021 19:34:35 :: Occurance of 'PRO' NOT found.Proceed with installation.
+24.01.2021 19:34:35 :: Installation can CONTINUE. Processor : AMD Ryzen 7 4800H with Radeon Graphics          Manufacturer : HP
+24.01.2021 19:36:32 :: Occurance of 'PRO' NOT found.Proceed with installation.
+24.01.2021 19:36:32 :: Installation can CONTINUE. Processor : AMD Ryzen 7 4800H with Radeon Graphics          Manufacturer : HP
+24.01.2021 19:36:32 :: Function RemoveAMDRMService Started.
+24.01.2021 19:36:32 :: Function ReadRegistryKey started.
+24.01.2021 19:36:32 :: Function ReadRegistryKey KeyValue is \??\C:\Program Files\AMD\RyzenMasterSDK\bin\AMDRyzenMasterDriver.sys
+24.01.2021 19:36:32 :: Function ReadRegistryKey Ended.
+24.01.2021 19:36:32 :: SDK install path as per environment variable : C:\Program Files\AMD\RyzenMasterSDK\
+24.01.2021 19:36:32 :: Path from which service runs as per registry : \??\C:\Program Files\AMD\RyzenMasterSDK\bin\AMDRyzenMasterDriver.sys
+24.01.2021 19:36:32 :: Uninstalling driver service as it belongs to current installer being removed.
+24.01.2021 19:36:32 :: Function ExecuteFiles strBatchFilePath "C:\Program Files\AMD\RyzenMasterSDK\DriverUtility.bat" -u
+24.01.2021 19:36:33 :: Function ExecuteFiles errReturn 0 for file "C:\Program Files\AMD\RyzenMasterSDK\DriverUtility.bat" -u.
+24.01.2021 19:36:33 :: Function RemoveAMDRMService. Minor Upgrade property is : 
+24.01.2021 19:36:33 :: Function RemoveAMDRMService Ended.
