@@ -1,10 +1,9 @@
 package src;
-import java.awt.*;
+
 import java.io.*;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import javax.security.auth.callback.Callback;
+
 
 public class Controller  {
     @FXML
@@ -27,11 +26,9 @@ public class Controller  {
     @FXML
     private TableColumn TableCol3;
 
-    @FXML
-    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+
+
 
     @FXML
     private TableView<Official> TableV;
@@ -78,9 +75,9 @@ public class Controller  {
                              FileOutputStream output = new FileOutputStream(fileOut);
                              BufferedInputStream buffer = new BufferedInputStream(input);
                              byte[] data=new byte[buffer.available()];
-
-                                 buffer.read(data,0,data.length);
-
+                                    while(buffer.available()>0) {
+                                        buffer.read(data, 0, data.length);
+                                    }
                              output.write(data,0,data.length);
                              output.close();
                              buffer.close();
@@ -108,18 +105,17 @@ public class Controller  {
 
     });
         Button3.setOnAction(event -> {
-            SaveState save;
+            String[] names= new String[0];
+            SaveState save = new SaveState(names,names,names);
             ArrayList<SaveState> saveArray = new ArrayList<SaveState>();
             for(var vol:Main.dataOfficial){
-                save = new SaveState(vol.getName(), vol.getEmail(), vol.getPath());
+                 SaveState(vol.getName(), vol.getEmail(), vol.getPath());
                 saveArray.add(save);
             }
             try{
                 FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
                 ObjectOutputStream objPut = new ObjectOutputStream(outPut);
-                for(var vols:saveArray){
-                    objPut.writeObject(vols);
-                }
+                objPut.writeObject(saveArray.get(0));
                 objPut.close();
             }
             catch(Exception e){

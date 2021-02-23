@@ -6,33 +6,33 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class SaveState implements Serializable {
-    private String nameInfo;
-    private String emailInfo;
-    private String pathInfo;
+    private String[] nameInfo;
+    private String[] emailInfo;
+    private String[] pathInfo;
 
-    public SaveState(String nameInfo,String emailInfo,String pathInfo){
+    public SaveState(String[] nameInfo,String[] emailInfo,String[] pathInfo){
         this.nameInfo = nameInfo;
         this.emailInfo = emailInfo;
         this.pathInfo = pathInfo;
     }
 
-    public String getNameInfo(){
+    public String[] getNameInfo(){
         return nameInfo;
     }
 
-    public String getEmailInfo(){
+    public String[] getEmailInfo(){
         return emailInfo;
     }
-    public String getPathInfo(){
+    public String[] getPathInfo(){
         return pathInfo;
     }
-    public void setNameInfo(String nameInfo){
+    public void setNameInfo(String[] nameInfo){
         this.nameInfo = nameInfo;
     }
-    public void setEmailInfo(String emailInfo){
+    public void setEmailInfo(String[] emailInfo){
         this.emailInfo = emailInfo;
     }
-    public void setPathInfo(String pathInfo){
+    public void setPathInfo(String[] pathInfo){
         this.pathInfo = pathInfo;
     }
     @Override
