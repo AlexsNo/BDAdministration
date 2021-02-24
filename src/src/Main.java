@@ -18,38 +18,22 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Main extends Application {
-    public static SaveState saveState = new SaveState();
-    public static SaveState saveReturn;
+public class Main extends Application implements  Serializable {
+public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
+public static FileChooser fileChooser;
+public static File filePathChosser;
 static{
-    try {
-
-        FileInputStream input = new FileInputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
-        ObjectInputStream objPut = new ObjectInputStream(input);
-
-        saveReturn=(SaveState) objPut.readObject();
-
-
-    objPut.close();
-
-    }
-    catch(Exception e){
-
-    }
+    System.out.println(SaveState.readDate());
 
 }
-      public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
 
-    public static FileChooser fileChooser;
-    public static File filePathChosser;
+
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        if(saveReturn!=null)
-       for(int i=0;i<saveReturn.getPathInfo().size();i++){
-           dataOfficial.add(new Official(saveReturn.getNameInfo().get(i),
-                            saveReturn.getEmailInfo().get(i),
-                             saveReturn.getPathInfo().get(i)));
-       }
+
 
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");
@@ -62,9 +46,14 @@ static{
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.showOpenDialog(stage);
     }
-
-
     public static void main(String[] args) {
         launch(args);
+    }
+    public static ArrayList<Official> getData(ArrayList<SaveState> array){
+        ArrayList<Official> temp=null;
+        for(var vol:array){
+            temp.add(new Official(vol.getNameInfo(),vol.getEmailInfo(),vol.getPathInfo()));
+        }
+        return  temp;
     }
 }

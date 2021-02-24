@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 
 
-public class Controller  {
+public class Controller implements  Serializable  {
     @FXML
     private TableColumn TableCol1;
 
@@ -105,10 +105,7 @@ public class Controller  {
 
     });
         Button3.setOnAction(event -> {
-
-
-
-
+            SaveState.writeDate();
         });
     }
 }

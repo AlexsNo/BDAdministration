@@ -1,60 +1,66 @@
 package src;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SaveState implements Serializable {
-    private ArrayList<String> nameInfo;
-    private ArrayList<String> emailInfo;
-    private ArrayList<String> pathInfo;
-
-    public SaveState(){
-
+    private String nameInfo;
+    private String emailInfo;
+    private String pathInfo;
+    private static ArrayList<SaveState> temps = new ArrayList<SaveState>();
+    public SaveState(String nameInfo,String emailInfo,String pathInfo){
+        this.nameInfo=nameInfo;
+        this.nameInfo=emailInfo;
+        this.nameInfo=pathInfo;
     }
-
-    public ArrayList<String> getNameInfo(){
+    public String getNameInfo(){
         return nameInfo;
     }
-
-    public ArrayList<String> getEmailInfo(){
+    public String getEmailInfo(){
         return emailInfo;
     }
-    public ArrayList<String> getPathInfo(){
+    public String getPathInfo(){
         return pathInfo;
     }
-    public void setData(String nameInfo,String emailInfo,String pathInfo){
-        this.nameInfo.add(nameInfo);
-        this.emailInfo.add(emailInfo);
-        this.pathInfo.add(pathInfo);
+
+    public static void setData(String nameInfo,String emailInfo,String pathInfo){
+        temps.add(new SaveState(nameInfo,emailInfo,pathInfo));
     }
-    public ArrayList<Official> officialReturn(){
-        ArrayList<Official> temp = new ArrayList<Official>();
-       for(int i=0;i<nameInfo.size();i++){
-           temp.add(new Official(nameInfo.get(i),emailInfo.get(i),pathInfo.get(i)));
-       }
-       return temp;
-    }
-    public void writeDate(){
+
+    public static void writeDate(){
         for(var vol:Main.dataOfficial){
-            nameInfo.add(vol.getName());
-            emailInfo.add(vol.getEmail());
-            pathInfo.add(vol.getPath());
+            setData(vol.getName(), vol.getEmail(),vol.getPath());
         }
         try{
             FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
             ObjectOutputStream objPut = new ObjectOutputStream(outPut);
-            objPut.writeObject(officialReturn());
+            objPut.writeObject(temps);
             objPut.close();
+            outPut.close();
         }
         catch(Exception e){
 
         }
 
     }
+    public static  ArrayList<SaveState> readDate(){
+        try{
+            Object temp=null;
+            FileInputStream inPut = new FileInputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
+            ObjectInputStream objIn = new ObjectInputStream(inPut);
+            temp=objIn.readObject();
+            objIn.close();
+            inPut.close();
+            return (ArrayList<SaveState>) temp;
+
+        }
+        catch(Exception c){
+            c.printStackTrace();
+        }
+        return  null;
+    }
+
     @Override
     public String toString() {
         return "SaveState{" +
