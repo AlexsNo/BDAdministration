@@ -1,10 +1,6 @@
 package src;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Stream;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,9 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-
-
-public class Controller implements  Serializable  {
+public class Controller   {
     @FXML
     private TableColumn TableCol1;
 
@@ -25,10 +19,6 @@ public class Controller implements  Serializable  {
 
     @FXML
     private TableColumn TableCol3;
-
-
-
-
 
     @FXML
     private TableView<Official> TableV;
@@ -48,20 +38,15 @@ public class Controller implements  Serializable  {
     @FXML
     private TextField TextF2;
 
-
-
     @FXML
     void initialize() {
         TableCol1.setCellValueFactory(new PropertyValueFactory<Official,String>("name"));
         TableCol2.setCellValueFactory(new PropertyValueFactory<Official,String>("email"));
-        TableCol3.setCellValueFactory(new PropertyValueFactory<>("file"));
-
-
+        TableCol3.setCellValueFactory(new PropertyValueFactory<Official,String>("file"));
         TableV.setItems(Main.dataOfficial);
         TableV.getColumns().addAll(TableCol1,TableCol2,TableCol3);
 
          Button1.setOnAction(event ->{
-            if(!TextF1.getText().equals("")&&!TextF2.getText().equals(""))
             Main.dataOfficial.add(new Official(TextF1.getText(),TextF2.getText(),Main.filePathChosser.toString()));
 
              for(var vol:Main.dataOfficial){
@@ -85,6 +70,7 @@ public class Controller implements  Serializable  {
                          catch (Exception e){
 
                          }
+
                      }
                  });
              }
@@ -92,17 +78,7 @@ public class Controller implements  Serializable  {
 
          Button2.setOnAction(event -> {
              Stage stage = new Stage();
-
-            Main.FileInput(stage);
-             Button2.setOnAction(
-                     new EventHandler<ActionEvent>() {
-                         @Override
-                         public void handle(final ActionEvent e) {
-                             Main.filePathChosser = Main.fileChooser.showOpenDialog(stage);
-
-                         }
-                     });
-
+             Main.FileInput(stage);
     });
         Button3.setOnAction(event -> {
             SaveState.writeDate();

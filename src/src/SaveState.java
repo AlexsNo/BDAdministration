@@ -1,18 +1,21 @@
 package src;
 
+import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class SaveState implements Serializable {
     private String nameInfo;
     private String emailInfo;
     private String pathInfo;
-    private static ArrayList<SaveState> temps = new ArrayList<SaveState>();
+    private static ArrayList<SaveState> temp=new ArrayList<SaveState>();
+
     public SaveState(String nameInfo,String emailInfo,String pathInfo){
         this.nameInfo=nameInfo;
-        this.nameInfo=emailInfo;
-        this.nameInfo=pathInfo;
+        this.emailInfo=emailInfo;
+        this.pathInfo=pathInfo;
     }
     public String getNameInfo(){
         return nameInfo;
@@ -25,17 +28,17 @@ public class SaveState implements Serializable {
     }
 
     public static void setData(String nameInfo,String emailInfo,String pathInfo){
-        temps.add(new SaveState(nameInfo,emailInfo,pathInfo));
+        temp.add(new SaveState(nameInfo,emailInfo,pathInfo));
     }
 
     public static void writeDate(){
-        for(var vol:Main.dataOfficial){
-            setData(vol.getName(), vol.getEmail(),vol.getPath());
-        }
+            for(var vol:Main.dataOfficial){
+                setData(vol.getName(),vol.getEmail(),vol.getPath());
+            }
         try{
             FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
             ObjectOutputStream objPut = new ObjectOutputStream(outPut);
-            objPut.writeObject(temps);
+            objPut.writeObject(temp);
             objPut.close();
             outPut.close();
         }
@@ -44,29 +47,29 @@ public class SaveState implements Serializable {
         }
 
     }
-    public static  ArrayList<SaveState> readDate(){
-        try{
-            Object temp=null;
+    public static  ArrayList<SaveState> readDate() throws  Exception{
+        ArrayList<SaveState> temp;
+
+
             FileInputStream inPut = new FileInputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
             ObjectInputStream objIn = new ObjectInputStream(inPut);
-            temp=objIn.readObject();
+            temp = (ArrayList<SaveState>) objIn.readObject();
             objIn.close();
             inPut.close();
-            return (ArrayList<SaveState>) temp;
+        return  temp;
+        }
 
-        }
-        catch(Exception c){
-            c.printStackTrace();
-        }
-        return  null;
-    }
+
+
+
+
 
     @Override
     public String toString() {
         return "SaveState{" +
                 "nameInfo=" + getNameInfo() +
-                ", emailInfo=" + getNameInfo() +
-                ", pathInfo=" + getPathInfo() +
+                ",emailInfo=" +getEmailInfo() +
+                ",pathInfo=" + getPathInfo() +
                 '}';
     }
     }

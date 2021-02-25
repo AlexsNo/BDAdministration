@@ -1,40 +1,33 @@
 package src;
 
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.util.ArrayList;
 
-public class Main extends Application implements  Serializable {
+public class Main extends Application  {
 public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
 public static FileChooser fileChooser;
 public static File filePathChosser;
 static{
-    System.out.println(SaveState.readDate());
+    try{
+        for(var vol:SaveState.readDate()){
+            dataOfficial.add(new Official(vol.getNameInfo(),vol.getEmailInfo(), vol.getPathInfo()));
+        }
+    }
+    catch (Exception e){
+
+    }
 
 }
-
-
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 500));
@@ -44,7 +37,7 @@ static{
         fileChooser= new FileChooser();
         fileChooser.setTitle("Choose file");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.showOpenDialog(stage);
+        Main.filePathChosser = Main.fileChooser.showOpenDialog(stage);
     }
     public static void main(String[] args) {
         launch(args);
