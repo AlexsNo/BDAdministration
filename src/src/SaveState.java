@@ -32,9 +32,9 @@ public class SaveState implements Serializable {
     }
 
     public static void writeDate(){
-            for(var vol:Main.dataOfficial){
+            var vol=Main.dataOfficial.get(Main.dataOfficial.size()-1);
                 setData(vol.getName(),vol.getEmail(),vol.getPath());
-            }
+
         try{
             FileOutputStream outPut = new FileOutputStream("C:\\Users\\Randell\\IdeaProjects\\BD for Administration\\src\\src\\SaveBD\\saveBD.ser");
             ObjectOutputStream objPut = new ObjectOutputStream(outPut);

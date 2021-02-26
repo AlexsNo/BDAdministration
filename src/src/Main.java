@@ -19,6 +19,7 @@ static{
     try{
         for(var vol:SaveState.readDate()){
             dataOfficial.add(new Official(vol.getNameInfo(),vol.getEmailInfo(), vol.getPathInfo()));
+            SaveState.setData(vol.getNameInfo(),vol.getEmailInfo(),vol.getPathInfo());
         }
     }
     catch (Exception e){

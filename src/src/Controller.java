@@ -48,7 +48,7 @@ public class Controller   {
 
          Button1.setOnAction(event ->{
             Main.dataOfficial.add(new Official(TextF1.getText(),TextF2.getText(),Main.filePathChosser.toString()));
-
+             SaveState.writeDate();
              for(var vol:Main.dataOfficial){
                  vol.getFile().setOnAction(new EventHandler<ActionEvent>() {
                      @Override
@@ -81,7 +81,7 @@ public class Controller   {
              Main.FileInput(stage);
     });
         Button3.setOnAction(event -> {
-            SaveState.writeDate();
+
         });
     }
 }
