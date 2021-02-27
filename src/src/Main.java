@@ -25,12 +25,12 @@ static{
     catch (Exception e){
 
     }
-
+    Controller.hyperAction(true);
 }
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("BD Administration");
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
     }
