@@ -48,5 +48,6 @@
             </Button>
          </children>
       </AnchorPane>
+      <Label fx:id="Lab1" layoutX="476.0" layoutY="226.0" text="Label" />
    </children>
 </AnchorPane>

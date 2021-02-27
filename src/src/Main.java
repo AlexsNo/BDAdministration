@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Main extends Application  {
 public static ObservableList<Official> dataOfficial= FXCollections.observableArrayList();
@@ -26,9 +27,11 @@ static{
 
     }
     Controller.hyperAction(true);
+
 }
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         Parent root = FXMLLoader.load(getClass().getResource("MainFXML.fxml"));
         primaryStage.setTitle("BD Administration");
         primaryStage.setScene(new Scene(root, 800, 500));

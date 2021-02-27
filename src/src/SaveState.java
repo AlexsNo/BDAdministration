@@ -58,12 +58,6 @@ public class SaveState implements Serializable {
             inPut.close();
         return  temp;
         }
-
-
-
-
-
-
     @Override
     public String toString() {
         return "SaveState{" +

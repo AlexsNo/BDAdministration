@@ -1,14 +1,22 @@
 package src;
 
 import java.io.*;
+import java.util.Calendar;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Controller   {
     @FXML
@@ -39,6 +47,9 @@ public class Controller   {
     private TextField TextF2;
 
     @FXML
+    private Label Lab1;
+
+    @FXML
     void initialize() {
         TableCol1.setCellValueFactory(new PropertyValueFactory<Official,String>("name"));
         TableCol2.setCellValueFactory(new PropertyValueFactory<Official,String>("email"));
@@ -52,6 +63,7 @@ public class Controller   {
     });
 
 
+
          Button2.setOnAction(event -> {
              Stage stage = new Stage();
              Main.FileInput(stage);
@@ -59,6 +71,7 @@ public class Controller   {
         Button3.setOnAction(event -> {
 
         });
+
     }
     public static void hyperAction(boolean bol) {
         if(bol){
@@ -116,4 +129,6 @@ public class Controller   {
 
         }
     }
+
+
 }
